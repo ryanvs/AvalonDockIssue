@@ -10,4 +10,6 @@
     <PackageReference Include="Caliburn.Micro" Version="4.0.136-rc" />
   </ItemGroup>
 
+  <Import Project="..\SharedTestApp\SharedTestApp.projitems" Label="Shared" />
+
 </Project>

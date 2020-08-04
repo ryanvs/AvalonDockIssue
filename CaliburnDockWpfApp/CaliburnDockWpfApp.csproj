@@ -12,4 +12,6 @@
     <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.30.0" />
   </ItemGroup>
 
+  <Import Project="..\SharedTestApp\SharedTestApp.projitems" Label="Shared" />
+
 </Project>
