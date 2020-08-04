@@ -13,13 +13,43 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                    <Style x:Key="Flat">
+                        <Setter Property="Control.Background" Value="{x:Null}" />
+                        <Setter Property="Control.BorderBrush" Value="{x:Null}" />
+                        <Style.Triggers>
+                            <Trigger Property="Control.IsMouseOver" Value="True">
+                                <Setter Property="Control.Background" Value="{x:Null}" />
+                                <Setter Property="Control.BorderBrush" Value="{x:Null}" />
+                            </Trigger>
+                            <Trigger Property="Control.IsFocused" Value="True">
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <avalondock:DockingManager x:Name="Manager"
-                                   ActiveContent="{Binding ActiveLayoutItem, Mode=TwoWay}"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="_Window">
+                <MenuItem Header="Window A" Command="{Binding ShowACommand}"/>
+                <MenuItem Header="Window B" Command="{Binding ShowBCommand}"/>
+                <MenuItem Header="Window C" Command="{Binding ShowCCommand}"/>
+            </MenuItem>
+        </Menu>
+
+        <avalondock:DockingManager x:Name="DockManager"
+                                   Grid.Row="1" Grid.Column="0"
+                                   ActiveContent="{Binding ActiveItem, Mode=TwoWay}"
                                    DocumentsSource="{Binding Items}">
             <avalondock:DockingManager.DocumentHeaderTemplate>
                 <DataTemplate>
@@ -36,6 +66,67 @@
                     </Grid>
                 </DataTemplate>
             </avalondock:DockingManager.DocumentHeaderTemplate>
+            <avalondock:DockingManager.LayoutItemContainerStyle>
+                <Style TargetType="{x:Type avalondock:LayoutItem}">
+                    <Setter Property="Title" Value="{Binding Model.DisplayName, Mode=OneWay}"/>
+                    <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
+                </Style>
+            </avalondock:DockingManager.LayoutItemContainerStyle>
         </avalondock:DockingManager>
+
+        <TabControl x:Name="TabManager"
+                    Grid.Row="1" Grid.Column="1"
+                    ItemsSource="{Binding Items}"
+                    SelectedItem="{Binding ActiveItem, Mode=TwoWay}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Ellipse x:Name="DirtyIndicator"
+                                 Grid.Column="0"
+                                 Height="6"
+                                 Width="6"
+                                 Fill="Red"
+                                 StrokeThickness="1"
+                                 Stroke="Black"
+                                 SnapsToDevicePixels="True"
+                                 Visibility="{Binding IsDirty, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}"
+                                 Margin="1,0,1,0"/>
+                        <TextBlock x:Name="TitleText"
+                                   Grid.Column="1"
+                                   Margin="1,0,1,0"
+                                   MaxWidth="200"
+                                   Text="{Binding DisplayName, FallbackValue=#ERROR#}"
+                                   TextTrimming="CharacterEllipsis"
+                                   ToolTip="{Binding DisplayName}"/>
+                        <Button x:Name="CloseTabButton"
+                                Grid.Column="2"
+                                Margin="4,0,0,0"
+                                FontFamily="Marlett"
+                                Content="r"
+                                Command="{Binding CloseCommand}">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource Flat}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type TabItem}}}" Value="False">
+                                            <Setter Property="Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type TabItem}}}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+        </TabControl>
+
     </Grid>
 </Window>

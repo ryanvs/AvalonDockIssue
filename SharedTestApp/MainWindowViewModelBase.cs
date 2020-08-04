@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,18 +11,18 @@ namespace CaliburnTestWpfApp.Modules.ViewModels
 {
     public class MainWindowViewModelBase : Conductor<Screen>.Collection.OneActive
     {
-        private Screen _activeLayoutItem;
-
-        public Screen ActiveLayoutItem
+        public Task ActivateOrCreate<T>()
+            where T : Screen
         {
-            get { return _activeLayoutItem; }
-            set
+            var existing = Items.OfType<T>().FirstOrDefault();
+            if (existing == null)
             {
-                if (Set(ref _activeLayoutItem, value))
-                {
-                    ActivateItemAsync(value, CancellationToken.None);
-                }
+                var item = (T)Activator.CreateInstance(typeof(T));
+                item.Parent = this;
+                item.ConductWith(this);
+                return ActivateItemAsync(item, CancellationToken.None);
             }
+            return ActivateItemAsync(existing, CancellationToken.None);
         }
 
         protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
@@ -34,9 +35,9 @@ namespace CaliburnTestWpfApp.Modules.ViewModels
         {
             Trace.TraceInformation($"{GetType().Name}.OnInitializeAsync");
 
-            ActivateItemAsync(new AViewModel());
-            ActivateItemAsync(new BViewModel());
-            ActivateItemAsync(new CViewModel());
+            ActivateOrCreate<AViewModel>();
+            ActivateOrCreate<BViewModel>();
+            ActivateOrCreate<CViewModel>();
 
             return base.OnInitializeAsync(cancellationToken);
         }

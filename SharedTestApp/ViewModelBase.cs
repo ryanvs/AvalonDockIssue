@@ -37,7 +37,7 @@ namespace CaliburnTestWpfApp.Modules.ViewModels
             bool close = true;
             if (IsDirty)
             {
-                var result = MessageBox.Show("Are you sure you want to close?", DisplayName, MessageBoxButton.YesNo);
+                var result = MessageBox.Show("Are you sure you want to close?", DisplayName, MessageBoxButton.YesNo, MessageBoxImage.Question);
                 close = result == MessageBoxResult.Yes;
             }
             Trace.TraceInformation($"{GetType().Name}.CanCloseAsync: close={close}");
