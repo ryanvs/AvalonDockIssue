@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliburnTestWpfApp", "CaliburnTestWpfApp\CaliburnTestWpfApp.csproj", "{E713FFF2-D866-441E-833E-38A52A54A943}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliburnDockWpfApp", "CaliburnDockWpfApp\CaliburnDockWpfApp.csproj", "{CF0F964E-4AEA-4930-9376-2032C916378B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0FA83E62-EF6C-435B-9B33-20611A9F435F}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E713FFF2-D866-441E-833E-38A52A54A943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E713FFF2-D866-441E-833E-38A52A54A943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E713FFF2-D866-441E-833E-38A52A54A943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E713FFF2-D866-441E-833E-38A52A54A943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF0F964E-4AEA-4930-9376-2032C916378B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF0F964E-4AEA-4930-9376-2032C916378B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF0F964E-4AEA-4930-9376-2032C916378B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF0F964E-4AEA-4930-9376-2032C916378B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {923D5B20-183D-4032-9059-A231698949A1}
+	EndGlobalSection
+EndGlobal
