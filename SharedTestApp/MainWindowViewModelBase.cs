@@ -35,11 +35,20 @@ namespace CaliburnTestWpfApp.Modules.ViewModels
         {
             Trace.TraceInformation($"{GetType().Name}.OnInitializeAsync");
 
-            ActivateOrCreate<AViewModel>();
-            ActivateOrCreate<BViewModel>();
-            ActivateOrCreate<CViewModel>();
+
+            Task.Run(() => StartInitialDocuments());
 
             return base.OnInitializeAsync(cancellationToken);
+        }
+
+        protected async Task StartInitialDocuments()
+        {
+            await Task.Delay(100);
+            await ActivateOrCreate<AViewModel>();
+            await Task.Delay(100);
+            await ActivateOrCreate<BViewModel>();
+            await Task.Delay(100);
+            await ActivateOrCreate<CViewModel>();
         }
     }
 }

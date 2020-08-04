@@ -27,20 +27,10 @@ Using AvalonDock and Caliburn.Micro, if a displayed item overrides the `Screen.C
 
 ![Still prompted to close](doc/AvalonDock_App_4_StillPromptsUserOnClose.png)
 
+5. Snoop shows the `PART_SelectedContentHost` is empty and Width is 0.
 
-# Comparison App with TabControl
+![Still prompted to close](doc/AvalonDock_App_5_SnoopAfterCloseCancelled.png)
 
-In this application, I just used a `TabControl` for comparison.
+6. If you use the menu to recreate A, B, and C, only A and C are visible in AvalonDock. This is because B was never actually closed and still exists, just not shown in AvalonDock.
 
-1. Start CaliburnTestWpfApp
-
-![Initial TabControl Test App](doc/TabControl_App_1_AllDocuments.png)
-
-2. Click the main application close "X" button, and a message box appears for BViewModel
-
-![B asks to close](doc/TabControl_App_2_MessageBox.png)
-
-3. Click the "No" button in the message box. Only document "B" remains
-
-![No Documents](doc/TabControl_App_3_OnlyBRemains.png)
-
+![Still prompted to close](doc/AvalonDock_App_6_RecreateNewDocuments.png)
