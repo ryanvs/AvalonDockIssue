@@ -22,6 +22,18 @@ namespace CaliburnTestWpfApp.Modules.ViewModels
             set { Set(ref _isDirty, value); }
         }
 
+        private string _customText;
+
+        public string CustomText
+        {
+            get { return _customText; }
+            set
+            {
+                if (Set(ref _customText, value))
+                    IsDirty = true;
+            }
+        }
+
         private RelayCommand _closeCommand;
 
         public RelayCommand CloseCommand
