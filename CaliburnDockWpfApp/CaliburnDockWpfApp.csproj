@@ -7,9 +7,17 @@
     <RootNamespace>CaliburnTestWpfApp</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>TRACE;DEBUG;CALIBURN_ASYNC</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DefineConstants>TRACE;CALIBURN_ASYNC</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Caliburn.Micro" Version="3.2.0" />
-    <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.30.0" />
+    <PackageReference Include="Caliburn.Micro" Version="4.0.136-rc" />
+    <PackageReference Include="Xceed.Products.Wpf.Toolkit.AvalonDock" Version="4.0.20315.13310" />
   </ItemGroup>
 
   <Import Project="..\SharedTestApp\SharedTestApp.projitems" Label="Shared" />

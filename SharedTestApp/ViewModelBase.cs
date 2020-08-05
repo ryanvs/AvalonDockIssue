@@ -29,16 +29,11 @@ namespace CaliburnTestWpfApp.Modules.ViewModels
             get
             {
                 return _closeCommand
-#if CALIBURN_40
                     ?? (_closeCommand = new RelayCommand(_ => TryCloseAsync(null)));
-#else
-                    ?? (_closeCommand = new RelayCommand(_ => TryClose(null)));
-#endif
             }
         }
 
-#if CALIBURN_40
-        public override Task<bool> CanCloseAsync(CancellationToken cancellationToken = default)
+        protected bool CanClosePrompt()
         {
             bool close = true;
             if (IsDirty)
@@ -46,6 +41,13 @@ namespace CaliburnTestWpfApp.Modules.ViewModels
                 var result = MessageBox.Show("Are you sure you want to close?", DisplayName, MessageBoxButton.YesNo, MessageBoxImage.Question);
                 close = result == MessageBoxResult.Yes;
             }
+            return close;
+        }
+
+#if CALIBURN_ASYNC
+        public override Task<bool> CanCloseAsync(CancellationToken cancellationToken = default)
+        {
+            bool close = CanClosePrompt();
             Trace.TraceInformation($"{GetType().Name}.CanCloseAsync: close={close}");
             return Task.FromResult(close);
         }
@@ -56,14 +58,15 @@ namespace CaliburnTestWpfApp.Modules.ViewModels
             return base.OnDeactivateAsync(close, cancellationToken);
         }
 #else
+        public Task TryCloseAsync(bool? dialogResult)
+        {
+            TryClose(dialogResult);
+            return Task.FromResult(dialogResult);
+        }
+
         public override void CanClose(Action<bool> callback)
         {
-            bool close = true;
-            if (IsDirty)
-            {
-                var result = MessageBox.Show("Are you sure you want to close?", DisplayName, MessageBoxButton.YesNo, MessageBoxImage.Question);
-                close = result == MessageBoxResult.Yes;
-            }
+            bool close = CanClosePrompt();
             Trace.TraceInformation($"{GetType().Name}.CanClose: close={close}");
             callback(close);
         }

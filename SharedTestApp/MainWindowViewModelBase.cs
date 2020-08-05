@@ -24,7 +24,7 @@ namespace CaliburnTestWpfApp.Modules.ViewModels
             return ActivateItemAsync(item, CancellationToken.None);
         }
 
-#if CALIBURN_40
+#if CALIBURN_ASYNC
         protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
         {
             Trace.TraceInformation($"{GetType().Name}.OnDeactivateAsync: close={close}");
