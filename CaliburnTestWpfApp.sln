@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliburnTestWpfApp", "CaliburnTestWpfApp\CaliburnTestWpfApp.csproj", "{E713FFF2-D866-441E-833E-38A52A54A943}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaliburnDockWpfApp", "CaliburnDockWpfApp\CaliburnDockWpfApp.csproj", "{CF0F964E-4AEA-4930-9376-2032C916378B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0FA83E62-EF6C-435B-9B33-20611A9F435F}"
@@ -18,17 +16,12 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SharedTestApp\SharedTestApp.projitems*{8ba1f7b4-0550-4653-8dd6-ccb35c4803b1}*SharedItemsImports = 13
 		SharedTestApp\SharedTestApp.projitems*{cf0f964e-4aea-4930-9376-2032c916378b}*SharedItemsImports = 5
-		SharedTestApp\SharedTestApp.projitems*{e713fff2-d866-441e-833e-38a52a54a943}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E713FFF2-D866-441E-833E-38A52A54A943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E713FFF2-D866-441E-833E-38A52A54A943}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E713FFF2-D866-441E-833E-38A52A54A943}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E713FFF2-D866-441E-833E-38A52A54A943}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF0F964E-4AEA-4930-9376-2032C916378B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF0F964E-4AEA-4930-9376-2032C916378B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF0F964E-4AEA-4930-9376-2032C916378B}.Release|Any CPU.ActiveCfg = Release|Any CPU

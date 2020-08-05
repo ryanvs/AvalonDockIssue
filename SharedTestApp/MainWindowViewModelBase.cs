@@ -14,17 +14,17 @@ namespace CaliburnTestWpfApp.Modules.ViewModels
         public Task ActivateOrCreate<T>()
             where T : Screen
         {
-            var existing = Items.OfType<T>().FirstOrDefault();
-            if (existing == null)
+            var item = Items.OfType<T>().FirstOrDefault();
+            if (item == null)
             {
-                var item = (T)Activator.CreateInstance(typeof(T));
+                item = (T)Activator.CreateInstance(typeof(T));
                 item.Parent = this;
                 item.ConductWith(this);
-                return ActivateItemAsync(item, CancellationToken.None);
             }
-            return ActivateItemAsync(existing, CancellationToken.None);
+            return ActivateItemAsync(item, CancellationToken.None);
         }
 
+#if CALIBURN_40
         protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
         {
             Trace.TraceInformation($"{GetType().Name}.OnDeactivateAsync: close={close}");
@@ -35,11 +35,32 @@ namespace CaliburnTestWpfApp.Modules.ViewModels
         {
             Trace.TraceInformation($"{GetType().Name}.OnInitializeAsync");
 
-
             Task.Run(() => StartInitialDocuments());
 
             return base.OnInitializeAsync(cancellationToken);
         }
+#else
+        public Task ActivateItemAsync(Screen item, CancellationToken cancellationToken)
+        {
+            ActivateItem(item);
+            return Task.FromResult(0);
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            Trace.TraceInformation($"{GetType().Name}.OnDeactivate: close={close}");
+            base.OnDeactivate(close);
+        }
+
+        protected override void OnInitialize()
+        {
+            Trace.TraceInformation($"{GetType().Name}.OnInitialize");
+
+            Task.Run(() => StartInitialDocuments());
+
+            base.OnInitialize();
+        }
+#endif
 
         protected async Task StartInitialDocuments()
         {
